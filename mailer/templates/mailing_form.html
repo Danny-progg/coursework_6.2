@@ -1,0 +1,41 @@
+{% extends "mailer/base.html" %}
+
+{% block content %}
+<div class="col-12">
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header">
+          {% if client_form.instance.id %}
+            Редактирование рассылки
+          {% else %}
+            Создать новую рассылку
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+
+            <h2>Добавить получателей вашего письма</h2>
+            {{ client_form.as_p }}
+
+            <h2>Добавить вашу рассылку</h2>
+            {{ mailing_form.as_p }}
+
+            <h2>Создать ваше письмо</h2>
+            {{ message_form.as_p }}
+
+            <button type="submit" class="btn btn-success">
+                {% if client_form.instance.id %}
+                    Сохранить изменения
+                {% else %}
+                    Создать рассылку
+                {% endif %}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
